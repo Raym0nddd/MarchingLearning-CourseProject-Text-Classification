@@ -60,6 +60,7 @@ if __name__ == '__main__':
         print(model.parameters)
         train(config, model, train_iter, dev_iter, test_iter)
 
+    # 以下为小组新增代码
     else:
         model = x.Model(config).to(config.device)
         interact(model, config, dataset, model_name, word=args.word)

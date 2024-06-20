@@ -102,7 +102,7 @@ def get_predicted_label(predictions, class_list):
     predicted_label = class_list[predictions.argmax().item()]
     return predicted_label
 
-# 与训练好的模型进行交互
+# 与训练好的模型进行交互（本函数也会新增的代码）
 def interact(model, config, dataset, model_name, word=True):
     model.load_state_dict(torch.load(dataset + '/saved_dict/' + model_name + '.ckpt'))
     # 分词
