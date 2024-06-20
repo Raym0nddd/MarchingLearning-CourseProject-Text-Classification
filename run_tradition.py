@@ -81,7 +81,7 @@ def main():
 
     # Predict and evaluate using the loaded model
     y_pred = loaded_model.predict(X_test)
-    print(classification_report(y_test, y_pred, target_names=class_list))
+    print(classification_report(y_test, y_pred, target_names=class_list, digits=4))
 
 if __name__ == "__main__":
     main()
