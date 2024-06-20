@@ -1,3 +1,4 @@
+# 以下代码用于对数据集中的文本进行分词处理，为小组新增代码
 import jieba
 import os
 
