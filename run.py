@@ -16,14 +16,15 @@ args = parser.parse_args()
 
 
 if __name__ == '__main__':
-    # dataset = 'THUCNews'  # 清华新闻数据集
+    dataset = 'THUCNews'  # 清华新闻数据集
     # dataset = 'weibo_4modes' # 三十六万微博四分类数据集
     # dataset = 'weibo_senti_100k'  # 十万条微博两分类数据集
     # dataset = 'yelp_review_full'  # 七十万条Yelp五分类数据集
-    dataset = 'sst_2'  # SST二分类数据集
+    # dataset = 'sst_2'  # SST二分类数据集
 
     # 搜狗新闻:embedding_SougouNews.npz, 腾讯:embedding_Tencent.npz, 随机初始化:random
     embedding = 'embedding_SougouNews.npz'
+
     if args.embedding == 'random':
         embedding = 'random'
     model_name = args.model  # 'TextRCNN'  # TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer
