@@ -8,15 +8,16 @@ import argparse
 from utils import interact
 
 parser = argparse.ArgumentParser(description='Chinese Text Classification')
-parser.add_argument('--model', type=str, required=True, help='choose a model: TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer')
+parser.add_argument('--model', type=str, required=True,
+                    help='choose a model: TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer')
 parser.add_argument('--embedding', default='pre_trained', type=str, help='random or pre_trained')
 parser.add_argument('--word', default=False, type=bool, help='True for word, False for char')
 parser.add_argument('--test', default=False, type=bool, help='True for test, False for train')
 args = parser.parse_args()
 
-
 if __name__ == '__main__':
     dataset = 'THUCNews'  # 清华新闻数据集
+    # dataset = 'THUCNewsWord'  # 清华新闻分词数据集
     # dataset = 'weibo_4modes' # 三十六万微博四分类数据集
     # dataset = 'weibo_senti_100k'  # 十万条微博两分类数据集
     # dataset = 'yelp_review_full'  # 七十万条Yelp五分类数据集
@@ -28,15 +29,11 @@ if __name__ == '__main__':
     if args.embedding == 'random':
         embedding = 'random'
     model_name = args.model  # 'TextRCNN'  # TextCNN, TextRNN, FastText, TextRCNN, TextRNN_Att, DPCNN, Transformer
-    if model_name == 'FastText':
-        from utils_fasttext import build_dataset, build_iterator, get_time_dif
-        embedding = 'random'
-    else:
-        from utils import build_dataset, build_iterator, get_time_dif
+    from utils import build_dataset, build_iterator, get_time_dif
 
     x = import_module('models.' + model_name)
     config = x.Config(dataset, embedding)
-    
+
     if args.test == False:
         np.random.seed(1)
         torch.manual_seed(1)
@@ -61,6 +58,7 @@ if __name__ == '__main__':
         print(model.parameters)
         train(config, model, train_iter, dev_iter, test_iter)
 
+    # 以下为小组新增代码，可以用于与训练好的模型进行测试互动
     else:
         model = x.Model(config).to(config.device)
         interact(model, config, dataset, model_name, word=args.word)
